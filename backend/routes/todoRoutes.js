@@ -54,7 +54,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//update the todos
+//replace the todos
 router.put("/:id", async (req, res) => {
   try {
     const updatedTodo = await Todo.findByIdAndUpdate(
@@ -76,8 +76,6 @@ router.put("/:id", async (req, res) => {
 });
 
 
-// router.get('/about', async (req, res) =>{
 
-// })
 
 module.exports = router;

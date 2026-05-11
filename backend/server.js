@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-// const cors = require("cors")
+const cors = require("cors")
 
 const todoRoutes = require("./routes/todoRoutes.js");
 
@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 //middleware
-// app.use(cors());
+app.use(cors());
 
 // form data
 app.use(express.json());
