@@ -31,6 +31,6 @@ app.use("/api/todos", todoRoutes);
 
 const port = process.env.PORT || 5000;
 //server is listening
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`server running successfully`);
 });
