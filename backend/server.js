@@ -29,8 +29,8 @@ connectDB();
 // routes
 app.use("/api/todos", todoRoutes);
 
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 //server is listening
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`server running successfully`);
 });

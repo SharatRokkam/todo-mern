@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "http://localhost:5000/api/todos",
 });
 
 export const getTodos = () => API.get("/");
 
-export const createTodo = (todoData) => API.post("/", todoData);
+export const createTodo = (data) => API.post("/", data);
 
-export const updateTodo = (id, todoData) => API.put(`/${id}`, todoData);
+export const updateTodo = (id, data) => API.put(`/${id}`, data);
 
 export const deleteTodo = (id) => API.delete(`/${id}`);

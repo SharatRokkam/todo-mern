@@ -1,56 +1,143 @@
-import { useEffect, useState } from "react";
+  import { useEffect, useState } from "react";
 
-const TodoForm = ({ onSubmit, editTodo, clearEdit }) => {
-  const [text, setText] = useState("");
+  function TodoForm({
+    onSubmit,
+    editTodo,
+    clearEdit,
+  }) {
 
-  useEffect(() => {
-    if (editTodo) {
-      setText(editTodo.text);
-    }
-  }, [editTodo]);
+    const [text, setText] =
+      useState("");
 
-  const handleSubmit = (e) => {
-    // it protect the form from autosubmission
-    e.preventDefault();
+    const [priority, setPriority] =
+      useState("Medium");
 
-    if (!text.trim()) return;
-    onSubmit(text);
+    const [category, setCategory] =
+      useState("General");
 
-    setText("");
-  };
+    // FILL INPUTS DURING EDIT
+    useEffect(() => {
 
-  return (
-    <form className="form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="enter your todo"
-        value={text}
-        className="input"
-        onChange={(e) => setText(e.target.value)}
-      />
+      if (editTodo) {
 
-      {editTodo ? (
-        <button type="submit" className="button">
-          Update
-        </button>
-      ) : (
-        <button type="submit" className="">
-          Add
-        </button>
-      )}
+        setText(editTodo.text);
 
-      {editTodo && (
-        <button
-          type="button
-            "
-          className="button"
-          onClick={clearEdit}
-        >
-          Cancel
-        </button>
-      )}
-    </form>
-  );
-};
+        setPriority(
+          editTodo.priority
+        );
 
-export default TodoForm;
+        setCategory(
+          editTodo.category
+        );
+      }
+
+    }, [editTodo]);
+
+    // HANDLE SUBMIT
+    const handleSubmit = (e) => {
+
+      e.preventDefault();
+
+      if (!text.trim()) return;
+
+      onSubmit({
+        text,
+        priority,
+        category,
+      });
+
+      // RESET FORM
+      setText("");
+
+      setPriority("Medium");
+
+      setCategory("General");
+    };
+
+    return (
+
+      <form
+        className="todo-form"
+        onSubmit={handleSubmit}
+      >
+
+        {/* TASK INPUT */}
+
+        <input
+          type="text"
+          placeholder="What needs to be done?"
+          value={text}
+          onChange={(e) =>
+            setText(e.target.value)
+          }
+          className="todo-input"
+        />
+
+        {/* PRIORITY + CATEGORY */}
+
+        <div className="form-row">
+
+          <select
+            value={priority}
+            onChange={(e) =>
+              setPriority(e.target.value)
+            }
+            className="select"
+          >
+
+            <option>Low</option>
+
+            <option>Medium</option>
+
+            <option>High</option>
+
+          </select>
+
+          <input
+            type="text"
+            placeholder="Category"
+            value={category}
+            onChange={(e) =>
+              setCategory(e.target.value)
+            }
+            className="select"
+          />
+
+        </div>
+
+        {/* BUTTONS */}
+
+        <div className="button-group">
+
+          <button className="primary-btn">
+
+            {
+              editTodo
+                ? "Update Task"
+                : "Add Task"
+            }
+
+          </button>
+
+          {
+            editTodo && (
+
+              <button
+                type="button"
+                className="secondary-btn"
+                onClick={clearEdit}
+              >
+
+                Cancel
+
+              </button>
+            )
+          }
+
+        </div>
+
+      </form>
+    );
+  }
+
+  export default TodoForm;
