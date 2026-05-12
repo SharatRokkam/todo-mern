@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "/api/todos",
+  baseURL: "https://taskflowv2.onrender.com/api/todos",
 });
 
 export const getTodos = () => API.get("/");
